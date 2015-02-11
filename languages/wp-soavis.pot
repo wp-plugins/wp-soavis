@@ -1,0 +1,453 @@
+# Copyright (C) 2013 WP_SoaVis
+# This file is distributed under the same license as the WP_SoaVis package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP_SoaVis 0.1.0\n"
+"Report-Msgid-Bugs-To: http://www.de-baat.nl/WP_SoaVis\n"
+"POT-Creation-Date: 2015-02-09 16:23+0100\n"
+"PO-Revision-Date: 2015-02-09 16:23+0100\n"
+"Last-Translator: De BAAT <De_BAAT@de-baat.nl>\n"
+"Language-Team: Jan de Baat <WP_SoaVis@de-baat.nl>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
+"esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-soavis.php:116
+#, php-format
+msgid "%s has been deactivated."
+msgstr ""
+
+#: wp-soavis.php:123
+#, php-format
+msgid "This plugin requires %s to be installed and active."
+msgstr ""
+
+#: wp-soavis.php:134
+#, php-format
+msgid ""
+"Please <a href=\"%s\">download</a> and install at least version %s of %s and "
+"try again."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:110 admin/class-wp-soavis-admin.php:111
+msgid "WP SoaVis"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:121 admin/class-wp-soavis-admin.php:122
+msgid "SoaVis Shortcodes"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:142
+msgid "Shortcodes"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:146
+msgid "Your Settings have been saved."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:151
+msgid "This page shows the shortcodes supported by the WP SoaVis plugin:"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:159
+msgid "Description"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:160
+msgid "Parameters"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:183
+msgid ""
+"<br/>This plugin supports the shortcodes as shown above as well as in all "
+"upper and lower case."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:184
+#, php-format
+msgid "<br/>More information can be found <a href=\"%s\">here</a>."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:185
+#, php-format
+msgid ""
+"<br/>If you have suggestions to improve this plugin, please leave a comment "
+"on this same <a href=\"%s\">page</a>."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:371
+msgid "SoaVis Information"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:474
+msgid "SoaVis Shortcode"
+msgstr ""
+
+#: includes/class-wp-soavis-graphviz.php:110
+#: includes/class-wp-soavis-post-types.php:87
+msgid "Service"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:86
+msgid "Services"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:92
+msgid "Components"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:93
+msgid "Component"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:98
+msgid "Systems"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:99
+msgid "System"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:104
+msgid "Projects"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:105
+msgid "Project"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:110
+msgid "Chains"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:111
+msgid "Chain"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:131
+msgid "Version"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:137
+msgid "Last Updated"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:143
+msgid "Visibility"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:167
+msgid "Add New"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:168
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:169
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:170
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:171
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:172
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:173
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:174
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: includes/class-wp-soavis-post-types.php:175
+#, php-format
+msgid "SoaVis %s"
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:73
+msgid "WP SoaVis Shortcodes"
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:120
+msgid ""
+"The shortcode to render a graph of service dependencies specified in the DOT "
+"language. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:121
+msgid "By default, this shortcode shows the dependencies of the current post. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:122
+msgid ""
+"If the current post is a service, this shortcode shows the dependencies of "
+"this current service. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:123
+msgid ""
+"For any other post type, this shortcode shows the dependencies of this "
+"current post. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:128
+#: includes/class-wp-soavis-shortcodes.php:171
+#: includes/class-wp-soavis-shortcodes.php:195
+#: includes/class-wp-soavis-shortcodes.php:216
+#: includes/class-wp-soavis-shortcodes.php:237
+#: includes/class-wp-soavis-shortcodes.php:258
+msgid "<strong>title</strong>=\"Title text\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:130
+#: includes/class-wp-soavis-shortcodes.php:173
+#: includes/class-wp-soavis-shortcodes.php:197
+#: includes/class-wp-soavis-shortcodes.php:218
+#: includes/class-wp-soavis-shortcodes.php:239
+#: includes/class-wp-soavis-shortcodes.php:260
+msgid "A text string that is used as title for this list. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:131
+msgid "Default value is Dependencies Graph."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:134
+#: includes/class-wp-soavis-shortcodes.php:201
+#: includes/class-wp-soavis-shortcodes.php:222
+#: includes/class-wp-soavis-shortcodes.php:243
+#: includes/class-wp-soavis-shortcodes.php:264
+msgid "<strong>alignment</strong>=\"&lt;slug&gt;\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:136
+#: includes/class-wp-soavis-shortcodes.php:203
+#: includes/class-wp-soavis-shortcodes.php:224
+#: includes/class-wp-soavis-shortcodes.php:245
+#: includes/class-wp-soavis-shortcodes.php:266
+msgid "Determines the location of the box, similar to the alignment of media. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:137
+#: includes/class-wp-soavis-shortcodes.php:204
+#: includes/class-wp-soavis-shortcodes.php:225
+#: includes/class-wp-soavis-shortcodes.php:246
+#: includes/class-wp-soavis-shortcodes.php:267
+msgid ""
+"Valid values are: <code>none</code>, <code>left</code>, <code>center</code>, "
+"<code>right</code>. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:138
+#: includes/class-wp-soavis-shortcodes.php:205
+#: includes/class-wp-soavis-shortcodes.php:226
+msgid "Default value is: <code>left</code>."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:141
+msgid "<strong>start_nodes</strong>=\"&lt;slug&gt;\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:143
+msgid ""
+"With this value, a list can be defined to be used as starting point for the "
+"graph tree. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:144
+msgid "The value should be a comma separated list of post IDs or titles. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:145
+msgid "Default value is empty, using the current post as starting node. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:148
+msgid "<strong>show_list</strong>=\"&lt;slug&gt;\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:150
+msgid "Determines whether to show a list of dependencies. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:151
+msgid "Default value is: <code>NO</code>, showing NO list. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:152
+msgid "Any other value will show a list. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:158
+msgid "The shortcode to render a list of SoaVis entities, optionally filtered."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:163
+msgid "<strong>type</strong>=\"&lt;slug&gt;\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:165
+msgid "The <code>slug</code> of the SoaVis type to show. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:166
+msgid "Valid values are: "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:167
+msgid ""
+"<code>Service</code>, <code>Project</code>, <code>System</code>, "
+"<code>Chain</code>, <code>Component</code>. "
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:168
+msgid "Default value is: <code>Service</code>."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:174
+msgid "Default value is empty, thus showing no title."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:177
+msgid "<strong>filter</strong>=\"&lt;slug&gt;\""
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:179
+msgid "A set of parameters that can be used to filter the list."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:190
+msgid "Renders a list of services this entity dependends on."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:198
+#: includes/class-wp-soavis-shortcodes.php:219
+msgid "Default value is Dependencies."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:211
+msgid "Renders a list of services that depend on this service."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:232
+msgid "Renders a box with information."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:240
+msgid "Default value is Info Box."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:247
+#: includes/class-wp-soavis-shortcodes.php:268
+msgid "Default value is: <code>right</code>."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:253
+msgid "Renders a list of references."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:261
+msgid "Default value is References."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:332
+msgid "Graph Dependencies List"
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:337
+#: includes/class-wp-soavis-shortcodes.php:352
+#: includes/class-wp-soavis-shortcodes.php:447
+#: includes/class-wp-soavis-shortcodes.php:460
+#: includes/class-wp-soavis-shortcodes.php:521
+#: includes/class-wp-soavis-shortcodes.php:534
+msgid "No dependencies found."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:397
+msgid "Graph Dependencies Text"
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:595
+#: includes/class-wp-soavis-shortcodes.php:608
+msgid "No references found."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:665
+msgid "No post found."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:755
+#, php-format
+msgid "No entities found for type %s."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:829
+msgid "No header information to display."
+msgstr ""
+
+#: includes/class-wp-soavis-shortcodes.php:856
+#, php-format
+msgid "No information to display for post %s."
+msgstr ""
+
+#, fuzzy
+#~ msgid "General Settings"
+#~ msgstr "Algemene Instellingen"
+
+#, fuzzy
+#~ msgid "Post tags"
+#~ msgstr "Tags toevoegen"
+
+#, fuzzy
+#~ msgid "Posts"
+#~ msgstr "Berichten"
+
+#, fuzzy
+#~ msgid "Change selection"
+#~ msgstr "Selectie bijsnijden"
+
+#, fuzzy
+#~ msgid "WP GraphViz: Options"
+#~ msgstr "Tekst schermopties:"
+
+#, fuzzy
+#~ msgid "WP GraphViz"
+#~ msgstr "WP_Screen API"
+
+#, fuzzy
+#~ msgid "Options saved"
+#~ msgstr "Opties opgeslagen."
+
+#, fuzzy
+#~ msgid "Features"
+#~ msgstr "Functies"
+
+#, fuzzy
+#~ msgid "Tag cloud"
+#~ msgstr "Tag Cloud"
+
+#~ msgid "BigData"
+#~ msgstr "BigData"
