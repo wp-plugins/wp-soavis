@@ -105,8 +105,8 @@ class WP_SoaVis_Post_Types {
 				'singular_name'       => __( 'Project',  $this->plugin_name ),
 				'menu_icon'           => 'dashicons-analytics',
 			),
-			'soavis_chains' => array(
-				'slug'                => 'soavis_chains',
+			'soavis_chain' => array(
+				'slug'                => 'soavis_chain',
 				'name'                => __( 'Chains', $this->plugin_name ),
 				'singular_name'       => __( 'Chain',  $this->plugin_name ),
 				'menu_icon'           => 'dashicons-admin-links',
@@ -118,6 +118,18 @@ class WP_SoaVis_Post_Types {
 		 * @param string $post_type The "Custom Post Type" that SoaVis uses.
 		 */
 		$this->post_types = apply_filters( 'wp_soavis_post_type', $this->post_types );
+	}
+
+	/**
+	 * Check whether the parameter is a Custom Post Type used by SoaVis.
+	 *
+	 * @param string $type The string to be tested
+	 */
+	public function wps_is_post_types( $type = '' ) {
+		if (isset($this->post_types[$type])) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -181,7 +193,7 @@ class WP_SoaVis_Post_Types {
 				'query_var'         => true,
 				'can_export'        => true,
 				'has_archive'       => true,
-				'supports'          => array( 'title', 'editor', 'excerpt', 'author', 'custom-fields', 'revisions', 'thumbnail' ),
+				'supports'          => array( 'title', 'editor', 'excerpt', 'author', 'custom-fields', 'comments', 'revisions', 'thumbnail' ),
 				'rewrite'           => array( 'slug' => $cur_post_type['slug'] ),
 				'menu_icon'         => $cur_post_type['menu_icon'],
 			);
@@ -193,6 +205,7 @@ class WP_SoaVis_Post_Types {
 			 */
 			$post_type_args = apply_filters( 'wp_soavis_post_type_args', $post_type_args );
 			register_post_type( $cur_post_type['slug'], $post_type_args );
+			register_taxonomy_for_object_type( 'category', $cur_post_type['slug'] );
 		}
 
 	}

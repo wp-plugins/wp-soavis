@@ -51,10 +51,21 @@ Almost any kind of diagram where something _connects_ to something else can be d
 
 == Changelog ==
 
+= 0.2.0 =
+* Fixed SoaVis Chain type.
+* Fixed generation of node url.
+* Added DebugMP support to public class.
+* Added support for Demo by Gravity Forms.
+* Added support for category by SoaVis post_types.
+
 = 0.1.0 =
 * First version starting the plugin.
 
 == Upgrade Notice ==
+
+= 0.2.0 =
+* Added support for Demo by Gravity Forms.
+* Fixed some small issues, see changelog.
 
 = 0.1.0 =
 As this is the first version, there is no upgrade info yet.

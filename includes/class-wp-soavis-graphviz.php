@@ -32,7 +32,7 @@ define ('SOAVIS_NODE_FORMAT_SHAPE_SERVICE',				'shape=box,');
 define ('SOAVIS_NODE_FORMAT_SHAPE_SYSTEM_DOWN',			'shape=invtriangle,');
 define ('SOAVIS_NODE_FORMAT_SHAPE_SYSTEM_UP',			'shape=triangle,');
 
-define ('SOAVIS_NODE_FORMAT_START',						' [width="3" ');
+define ('SOAVIS_NODE_FORMAT_START',						' [ ');
 define ('SOAVIS_NODE_FORMAT_END',						']; ');
 
 /**
@@ -418,6 +418,7 @@ class WP_SoaVis_GraphViz {
 		$node_data = array();
 
 		$node_data['ID']         = $post_in->ID;
+		$node_data['url']        = get_post_permalink($post_in->ID);
 		$node_data['guid']       = $post_in->guid;
 		$node_data['post_name']  = $post_in->post_name;
 		$node_data['post_title'] = $post_in->post_title;
@@ -488,7 +489,7 @@ class WP_SoaVis_GraphViz {
 		$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_LABEL, $node_data['post_title']);
 
 		// Add the url to the details for this node
-		$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $node_data['guid']);
+		$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $node_data['url']);
 
 		// Get some formatting parameters
 		$str_graphviz_text_node .= $this->get_node_format_color($node_data);
@@ -560,7 +561,7 @@ class WP_SoaVis_GraphViz {
 		$str_node_format .= SOAVIS_NODE_FORMAT_START;
 
 		// Add the url to the details for this node
-		$str_node_format .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $soavis_node['guid']);
+		$str_node_format .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $soavis_node['url']);
 
 		// Get some formatting parameters
 		$str_node_format .= $this->get_node_format_color($soavis_node);

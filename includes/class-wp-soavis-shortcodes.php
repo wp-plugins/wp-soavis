@@ -357,7 +357,7 @@ class WP_SoaVis_Shortcodes {
 					foreach ($wps_nodes_list as $ref_title => $ref_node) {
 //						$ref_post = get_page_by_title($ref_title, 'OBJECT', 'soavis_service');
 						if ($ref_node) {
-							$ref_link = $ref_node['type'] . ': <a href="' . $ref_node['guid'] . '">' . $ref_node['post_title'] . ' (' . $ref_node['ID'] . ')</a>';
+							$ref_link = $ref_node['type'] . ': <a href="' . $ref_node['url'] . '">' . $ref_node['post_title'] . ' (' . $ref_node['ID'] . ')</a>';
 							$ref_direction = $ref_node['direction'] . ' (' . $ref_node['level'] . ')';
 							$wps_shortcode_output_list .= $this->wps_generate_soavis_box_row($ref_link, $ref_direction);
 						} else {
@@ -861,7 +861,7 @@ class WP_SoaVis_Shortcodes {
 				switch ($key) {
 					case 'post_name':
 						$wps_list_output .= '<a href="';
-						$wps_list_output .= $cur_post->guid;
+						$wps_list_output .= get_post_permalink($cur_post->ID);
 						$wps_list_output .= '">';
 						$wps_list_output .= $cur_post->post_name;
 						$wps_list_output .= '</a>';

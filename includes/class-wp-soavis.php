@@ -213,10 +213,11 @@ class WP_SoaVis {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WP_SoaVis_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new WP_SoaVis_Public( $this );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles'  );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts',		$plugin_public, 'enqueue_styles'             );
+		$this->loader->add_action( 'wp_enqueue_scripts',		$plugin_public, 'enqueue_scripts'            );
+		$this->loader->add_action( 'gform_after_submission',	$plugin_public, 'wps_create_demo_post', 10, 2);
 
 	}
 

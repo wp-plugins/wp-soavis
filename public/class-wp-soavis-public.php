@@ -22,6 +22,14 @@
 class WP_SoaVis_Public {
 
 	/**
+	 * The main plugin object.
+	 *
+	 * @access   private
+	 * @var      WP_SoaVis    $plugin    The main plugin object.
+	 */
+	private $plugin;
+
+	/**
 	 * The ID of this plugin.
 	 *
 	 * @access   private
@@ -40,13 +48,14 @@ class WP_SoaVis_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @var      string    $plugin_name The name of the plugin.
-	 * @var      string    $version     The version of this plugin.
+	 *
+	 * @var      string    $main_plugin The object of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $main_plugin ) {
 
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
+		$this->plugin      = $main_plugin;
+		$this->plugin_name = $main_plugin->get_plugin_name();
+		$this->version     = $main_plugin->get_version();
 
 	}
 
@@ -92,6 +101,61 @@ class WP_SoaVis_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-soavis-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	/**
+	 * Use a custom post type if defined by a field in the form
+	 *
+	 */
+	public function wps_create_demo_post($entry, $form) {
+
+		$debug_out  = '';
+		$debug_out .= __FUNCTION__ . ' entry : ' . print_r($entry, true);
+		$debug_out .= __FUNCTION__ . ' form : ' . print_r($form, true);
+
+		// Get the post_id if it exists
+		if (isset($entry['post_id'])) {
+			$post_id = $entry['post_id'];
+		} else {
+			return;
+		}
+
+//		update_post_meta($post_id, 'debug_out', $debug_out);
+		// Add the demo attachment to the post
+		$ref_attachment = get_page_by_title('Demo', 'OBJECT', 'attachment');
+		set_post_thumbnail($post_id, $ref_attachment->ID);
+
+		// Check the values of the form fields
+		if (isset($form['fields'])) {
+			foreach ($form['fields'] as $field) {
+				// If isset, then get the value entered for this field
+				if (isset($entry[$field['id']])) {
+					$entry_value = $entry[$field['id']];
+
+					// If an existing post_type is found, then use it for this post
+					if (post_type_exists($entry_value)) {
+						set_post_type($post_id, $entry_value);
+						return;
+					}
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Simplify the parent debugMP interface.
+	 *
+	 * @param string $type
+	 * @param string $hdr
+	 * @param string $msg
+	 */
+	function debugMP($type,$hdr,$msg='') {
+		if (($type === 'msg') && ($msg!=='')) {
+			$msg = esc_html($msg);
+		}
+		if ($hdr != '') { $hdr = ' Public: ' . $hdr; }
+		$this->plugin->debugMP($type,$hdr,$msg,NULL,NULL,true);
 	}
 
 }
