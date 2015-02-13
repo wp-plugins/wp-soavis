@@ -121,11 +121,89 @@ class WP_SoaVis_Admin {
 			__( 'SoaVis Shortcodes', $this->plugin_name ),
 			__( 'SoaVis Shortcodes', $this->plugin_name ),
 			'edit_posts',
-			$this->plugin_name,
+			$this->plugin_name . '_shortcodes',
 			array( $this, 'render_soavis_shortcode_page' )
+		);
+
+		add_submenu_page(
+			$this->plugin_name,
+			__( 'SoaVis Settings', $this->plugin_name ),
+			__( 'SoaVis Settings', $this->plugin_name ),
+			'edit_posts',
+			$this->plugin_name . '_settings',
+			array( $this, 'render_soavis_settings_page' )
 		);
 	}
 
+
+	/**
+	 * Creates the settings fields for the plugin options page.
+	 */
+	public function add_soavis_settings_fields() {
+		$settings_group_id = WP_SOAVIS_OPTIONS_NAME . '-group';
+		$soavis_settings_section_id = 'wp-soavis-settings-section-general';
+
+		// Check whether to update options or not
+		if (wps_get_option(WP_SOAVIS_VERSION_NAME) != WP_SOAVIS_VERSION) {
+			wps_init_option_defaults();
+		}
+
+		register_setting( $settings_group_id, WP_SOAVIS_OPTIONS_NAME, array( $this, 'check_wp_soavis_option' ) );
+
+		add_settings_section(
+			$soavis_settings_section_id,
+			__( 'General Settings', $this->plugin_name ),
+			array( $this, 'render_soavis_settings_section' ),
+			$settings_group_id
+		);
+
+		add_settings_field(
+			'wp_soavis_max_graph_level',
+			__( 'Max Graph Level', $this->plugin_name ),
+			array( $this, 'render_wp_soavis_max_graph_level_field' ),
+			$settings_group_id,
+			$soavis_settings_section_id
+		);
+
+	}
+
+	function check_wp_soavis_option($input) {
+
+		$newinput = array();
+
+		// Always set the current version
+		$newinput[WP_SOAVIS_VERSION_NAME] = WP_SOAVIS_VERSION;
+
+		// Check value of wp_soavis_max_graph_level
+		$newinput['wp_soavis_max_graph_level'] = trim($input['wp_soavis_max_graph_level']);
+
+		return $newinput;
+	}
+
+	/**
+	 * Renders the plugin's options page.
+	 */
+	public function render_soavis_settings_page() {
+		$settings_group_id = WP_SOAVIS_OPTIONS_NAME . '-group';
+		require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/wp-soavis-admin-display.php';
+	}
+
+	/**
+	 * Renders the description for the AWS settings section.
+	 */
+	public function render_soavis_settings_section() {
+		echo _e( 'Manage your SoaVis settings below.', $this->plugin_name );
+	}
+
+	/**
+	 * Renders the settings field for the Max Graph Level.
+	 */
+	public function render_wp_soavis_max_graph_level_field() {
+		$wp_soavis_max_graph_level = wps_get_option('wp_soavis_max_graph_level');
+		$wp_soavis_max_graph_level_name = WP_SOAVIS_OPTIONS_NAME . '[wp_soavis_max_graph_level]';
+		?><input type="text" id="input_wp_soavis_max_graph_level" name="<?php echo $wp_soavis_max_graph_level_name; ?>" value="<?php echo $wp_soavis_max_graph_level;?>" />
+		<?php  echo __(' The maximum level to traverse the service network, use <strong>0</strong> to omit this check.', $this->plugin_name);
+	}
 
 	/**
 	 * Renders the page showing the SoaVis shortcodes.
@@ -403,29 +481,29 @@ class WP_SoaVis_Admin {
 	}
 
 	/**
-     * Saves the soavis information meta box contents.
-     *
-     * @param $post_id  int     The id of the post being saved.
+	 * Saves the soavis information meta box contents.
+	 *
+	 * @param $post_id  int     The id of the post being saved.
 	 */
 	public function save_soavis_information_meta_box( $post_id ) {
 		$this->debugMP('pr', __FUNCTION__ . ' REQUEST:', $_REQUEST);
 
-        // Check nonce
-        if ( !$this->is_nonce_ok( 'soavis_meta_box' ) ) {
-            return $post_id;
-        }
+		// Check nonce
+		if ( !$this->is_nonce_ok( 'soavis_meta_box' ) ) {
+			return $post_id;
+		}
 
-        // Ignore auto saves
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-            return $post_id;
-        }
+		// Ignore auto saves
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
 
-        // Check the user's permissions
-        if ( !current_user_can( 'edit_posts', $post_id ) ) {
-            return $post_id;
-        }
+		// Check the user's permissions
+		if ( !current_user_can( 'edit_posts', $post_id ) ) {
+			return $post_id;
+		}
 
-        // Sanitize user input
+		// Sanitize user input
 		foreach ($this->plugin->wps_post_types->info_box_params as $key => $value) {
 			$meta_value = sanitize_text_field( $_POST[$key] );
 			update_post_meta( $post_id, $value['post_meta'], $meta_value );

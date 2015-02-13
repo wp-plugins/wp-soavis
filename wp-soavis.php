@@ -12,7 +12,7 @@
  * Plugin Name:       WP SoaVis
  * Plugin URI:        http://www.soavis.eu
  * Description:       A plugin to provide SoaVis functionality for WordPress sites.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            De B.A.A.T.
  * Author URI:        https://www.de-baat.nl/WP_SoaVis
  * License:           GPLv3
@@ -28,10 +28,11 @@ if ( ! defined( 'WPINC' ) ) {
 
 //	WP_SoaVis definitions
 if ( ! defined( 'WP_SOAVIS_VERSION' ) ) {
-	define( 'WP_SOAVIS_VERSION',				'0.2.0' );
+	define( 'WP_SOAVIS_VERSION',				'0.3.0' );
+	define( 'WP_SOAVIS_VERSION_NAME',			'wp_soavis_version' );
 	define( 'WP_SOAVIS_LINK',					'http://www.soavis.eu' );
 	define( 'WP_SOAVIS_OPTIONS_NAME',			'wp-soavis-options' ); // Option name for save settings
-	define( 'WP_SOAVIS_DISPLAY_NAME',			'WP SoaVis' ); // Option name for save settings
+	define( 'WP_SOAVIS_DISPLAY_NAME',			'WP SoaVis' );
 
 	define( 'WP_SOAVIS_URL',					plugins_url('', __FILE__) );
 	define( 'WP_SOAVIS_DIR',					rtrim(plugin_dir_path(__FILE__), '/') );
@@ -76,62 +77,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_soavis' );
  * dashboard-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wp-soavis.php';
-
-/**
- * Checks if WP_GraphViz is supported
- *
- * @return true if WP_GraphViz is supported and active, false otherwise
- */
-function wps_is_wp_graphviz_supported() {
-
-	if ( defined( 'WP_GRAPHVIZ_VERSION' ) ) {
-		return version_compare( WP_GRAPHVIZ_VERSION, WPS_WP_GRAPHVIZ_MINIMUM_VERSION, '>=' );
-	} else {
-		return false;
-	}
-}
-
-/**
- * Manually deactivate this plugin when WP_GraphViz is not supported
- */
-function wps_manually_deactivate() {
-	deactivate_plugins( plugin_basename( __FILE__ ) );
-}
-
-/**
- * Generate a notice message when WP_GraphViz is not supported
- *
- * @return    string    The version number of the plugin.
- */
-function wps_check_wp_graphviz_notice() {
-
-	// IF WP_GraphViz is NOT installed and active then display notice and deactivate this plugin
-	if (! wps_is_wp_graphviz_supported()) {
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-soavis-activator.php';
-
-		$notice  = '';
-		$notice .= '<div class="error">';
-		$notice .= '<p>';
-		$notice .= '<strong>';
-		$notice .= sprintf(__('%s has been deactivated.', WPS_PLUGIN), WP_SOAVIS_DISPLAY_NAME);
-		$notice .= '</strong>';
-		$notice .= '<br/> ';
-		$notice .= sprintf(__('This plugin requires %s to be installed and active.', WPS_PLUGIN), WPS_WP_GRAPHVIZ_PLUGIN_NAME);
-		$notice .= '<br/> ';
-
-		$notice .= sprintf(__('Please <a href="%s">download</a> and install at least version %s of %s and try again.', WPS_PLUGIN),
-								WPS_WP_GRAPHVIZ_DOWNLOAD_URL, WPS_WP_GRAPHVIZ_MINIMUM_VERSION, WPS_WP_GRAPHVIZ_PLUGIN_NAME);
-		$notice .= '<br/>';
-		$notice .= '</p>';
-		$notice .= '</div>';
-
-		echo $notice;
-
-		// Deactivate ths plugin
-		wps_manually_deactivate();
-	}
-}
-add_action( 'admin_notices', 'wps_check_wp_graphviz_notice');
+require plugin_dir_path( __FILE__ ) . 'includes/wp-soavis-functions.php';
 
 /**
  * Begins execution of the plugin.

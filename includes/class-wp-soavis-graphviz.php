@@ -315,12 +315,13 @@ class WP_SoaVis_GraphViz {
 			return false;
 		}
 
-		// Handle the level check
+		// Handle the max_graph_level check
 		$level++;
-		if ($level > 3) {
+		if ($level > wps_get_option('wp_soavis_max_graph_level')) {
 			$this->debugMP('msg',__FUNCTION__ . ' returned for LEVEL ' . $level . ', post_title = !' . $post_title . '!');
 			return;
 		}
+		$this->debugMP('msg',__FUNCTION__ . ' wp_soavis_max_graph_level = ' . wps_get_option('wp_soavis_max_graph_level') . '!');
 
 		// Get the post objects for each dependency found
 		$child_nodes = array();

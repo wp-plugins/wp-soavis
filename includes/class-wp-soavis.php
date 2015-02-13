@@ -139,20 +139,20 @@ class WP_SoaVis {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-shared.php';
 
-        /**
-         * The class responsible for handling the SoaVis post_types.
-         */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-post-types.php';
+		/**
+		 * The class responsible for handling the SoaVis post_types.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-post-types.php';
 
-        /**
-         * The class responsible for handling the SoaVis shortcodes.
-         */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-shortcodes.php';
+		/**
+		 * The class responsible for handling the SoaVis shortcodes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-shortcodes.php';
 
-        /**
-         * The class responsible for handling the SoaVis GraphViz functionality.
-         */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-graphviz.php';
+		/**
+		 * The class responsible for handling the SoaVis GraphViz functionality.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-soavis-graphviz.php';
 
 		$this->loader = new WP_SoaVis_Loader();
 
@@ -188,20 +188,20 @@ class WP_SoaVis {
 		$this->loader->add_action( 'admin_enqueue_scripts',		$plugin_admin, 'enqueue_styles'  );
 		$this->loader->add_action( 'admin_enqueue_scripts',		$plugin_admin, 'enqueue_scripts' );
 
-        // Note: we're only adding the meta box for product post type
-        $this->loader->add_action( 'add_meta_boxes_product',	$plugin_admin, 'add_soavis_information_meta_box' );
-        $this->loader->add_action( 'save_post',					$plugin_admin, 'save_soavis_information_meta_box' );
+		// Note: we're only adding the meta box for product post type
+		$this->loader->add_action( 'add_meta_boxes_product',	$plugin_admin, 'add_soavis_information_meta_box' );
+		$this->loader->add_action( 'save_post',					$plugin_admin, 'save_soavis_information_meta_box' );
 
-        // Plugin menu
-//        $this->loader->add_action( 'admin_init', $plugin_admin, 'add_plugin_settings_fields');
-        $this->loader->add_action( 'admin_menu',				$plugin_admin, 'add_soavis_menu_page');
+		// Plugin menu
+		$this->loader->add_action( 'admin_init',				$plugin_admin, 'add_soavis_settings_fields');
+		$this->loader->add_action( 'admin_menu',				$plugin_admin, 'add_soavis_menu_page');
 
-        $this->loader->add_action( 'admin_init',				$plugin_admin, 'add_admin_post_actions');
-        $this->loader->add_action( 'admin_init',				$plugin_admin, 'add_admin_post_type_actions');
+		$this->loader->add_action( 'admin_init',				$plugin_admin, 'add_admin_post_actions');
+		$this->loader->add_action( 'admin_init',				$plugin_admin, 'add_admin_post_type_actions');
 
 		// Add actions to enable inserting shortcodes in the editor
-        $this->loader->add_action( 'media_buttons',				$plugin_admin, 'wps_action_media_buttons', 11);
-        $this->loader->add_action( 'admin_head',				$plugin_admin, 'wps_action_admin_head');
+		$this->loader->add_action( 'media_buttons',				$plugin_admin, 'wps_action_media_buttons', 11);
+		$this->loader->add_action( 'admin_head',				$plugin_admin, 'wps_action_admin_head');
 
 	}
 
@@ -272,53 +272,53 @@ class WP_SoaVis {
 		return $this->version;
 	}
 
-    /**
-     * Create a Map Settings Debug My Plugin panel.
-     *
-     * @return null
-     */
-    function create_DMPPanels() {
-        if (!isset($GLOBALS['DebugMyPlugin'])) { return; }
-        if (class_exists('DMPPanelWPSoaVisMain') == false) {
+	/**
+	 * Create a Map Settings Debug My Plugin panel.
+	 *
+	 * @return null
+	 */
+	function create_DMPPanels() {
+		if (!isset($GLOBALS['DebugMyPlugin'])) { return; }
+		if (class_exists('DMPPanelWPSoaVisMain') == false) {
 			require_once(dirname( __FILE__ ) . '/class.dmppanels.php');
-        }
-        $GLOBALS['DebugMyPlugin']->panels['wp-soavis'] = new DMPPanelWPSoaVisMain();
-    }
+		}
+		$GLOBALS['DebugMyPlugin']->panels['wp-soavis'] = new DMPPanelWPSoaVisMain();
+	}
 
-    /**
-     * Add DebugMyPlugin messages.
-     *
-     * @param string $panel - panel name
-     * @param string $type - what type of debugging (msg = simple string, pr = print_r of variable)
-     * @param string $header - the header
-     * @param string $message - what you want to say
-     * @param string $file - file of the call (__FILE__)
-     * @param int $line - line number of the call (__LINE__)
-     * @param boolean $notime - show time? default true = yes.
-     * @return null
-     */
-    function debugMP($type='msg', $header='Debug WP SoaVis',$message='',$file=null,$line=null,$notime=false) {
+	/**
+	 * Add DebugMyPlugin messages.
+	 *
+	 * @param string $panel - panel name
+	 * @param string $type - what type of debugging (msg = simple string, pr = print_r of variable)
+	 * @param string $header - the header
+	 * @param string $message - what you want to say
+	 * @param string $file - file of the call (__FILE__)
+	 * @param int $line - line number of the call (__LINE__)
+	 * @param boolean $notime - show time? default true = yes.
+	 * @return null
+	 */
+	function debugMP($type='msg', $header='Debug WP SoaVis',$message='',$file=null,$line=null,$notime=false) {
 
 		$panel='wp-soavis';
 
-        // Panel not setup yet?  Return and do nothing.
-        //
-        if (
-            !isset($GLOBALS['DebugMyPlugin']) ||
-            !isset($GLOBALS['DebugMyPlugin']->panels[$panel])
-           ) {
-            return;
-        }
+		// Panel not setup yet?  Return and do nothing.
+		//
+		if (
+			!isset($GLOBALS['DebugMyPlugin']) ||
+			!isset($GLOBALS['DebugMyPlugin']->panels[$panel])
+		   ) {
+			return;
+		}
 
-        // Do normal real-time message output.
-        //
-        switch (strtolower($type)):
-            case 'pr':
-                $GLOBALS['DebugMyPlugin']->panels[$panel]->addPR($header,$message,$file,$line,$notime);
-                break;
-            default:
-                $GLOBALS['DebugMyPlugin']->panels[$panel]->addMessage($header,$message,$file,$line,$notime);
-        endswitch;
-    }
+		// Do normal real-time message output.
+		//
+		switch (strtolower($type)):
+			case 'pr':
+				$GLOBALS['DebugMyPlugin']->panels[$panel]->addPR($header,$message,$file,$line,$notime);
+				break;
+			default:
+				$GLOBALS['DebugMyPlugin']->panels[$panel]->addMessage($header,$message,$file,$line,$notime);
+		endswitch;
+	}
 
 }

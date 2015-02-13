@@ -4,7 +4,7 @@ Donate link: http://www.soavis.eu
 Tags: comments, spam
 Requires at least: 4.1
 Tested up to: 4.1
-Stable tag: 0.1.0
+Stable tag: 0.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,10 @@ Almost any kind of diagram where something _connects_ to something else can be d
 
 == Changelog ==
 
+= 0.3.0 =
+* Fixed version of stable tag.
+* Added setting for traverse network level.
+
 = 0.2.0 =
 * Fixed SoaVis Chain type.
 * Fixed generation of node url.
@@ -62,6 +66,9 @@ Almost any kind of diagram where something _connects_ to something else can be d
 * First version starting the plugin.
 
 == Upgrade Notice ==
+
+= 0.3.0 =
+* Fixed some small issues and added some small functionality, see changelog.
 
 = 0.2.0 =
 * Added support for Demo by Gravity Forms.
