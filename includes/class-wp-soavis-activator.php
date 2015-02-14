@@ -67,7 +67,7 @@ class WP_SoaVis_Activator {
 	}
 
 	// gives a link to activate the plugin
-	public function wps_activate_link( $plugin_file = '' ) {
+	public static function wps_activate_link( $plugin_file = '' ) {
 
 		if ( $plugin_file != '' ) {
 			return wp_nonce_url( self_admin_url('plugins.php?action=activate&plugin=' . $plugin_file ), 'activate-plugin_' . $plugin_file );
@@ -77,7 +77,7 @@ class WP_SoaVis_Activator {
 	}
 
 	// return a nonced installation link for the plugin. checks wordpress.org to make sure it's there first.
-	public function wps_install_link( $plugin_slug = '' ) {
+	public static function wps_install_link( $plugin_slug = '' ) {
 		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
 		$info = plugins_api('plugin_information', array('slug' => $plugin_slug ));

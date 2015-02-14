@@ -100,8 +100,8 @@ function wps_is_wp_graphviz_supported() {
 /**
  * Manually deactivate this plugin when WP_GraphViz is not supported
  */
-function wps_manually_deactivate() {
-	deactivate_plugins( plugin_basename( __FILE__ ) );
+function wps_manually_deactivate( $plugin_base_name = '' ) {
+	deactivate_plugins( $plugin_base_name );
 }
 
 /**
@@ -113,7 +113,7 @@ function wps_check_wp_graphviz_notice() {
 
 	// IF WP_GraphViz is NOT installed and active then display notice and deactivate this plugin
 	if (! wps_is_wp_graphviz_supported()) {
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-soavis-activator.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-wp-soavis-activator.php';
 
 		$notice  = '';
 		$notice .= '<div class="error">';
@@ -125,8 +125,10 @@ function wps_check_wp_graphviz_notice() {
 		$notice .= sprintf(__('This plugin requires %s to be installed and active.', WPS_PLUGIN), WPS_WP_GRAPHVIZ_PLUGIN_NAME);
 		$notice .= '<br/> ';
 
-		$notice .= sprintf(__('Please <a href="%s">download</a> and install at least version %s of %s and try again.', WPS_PLUGIN),
-								WPS_WP_GRAPHVIZ_DOWNLOAD_URL, WPS_WP_GRAPHVIZ_MINIMUM_VERSION, WPS_WP_GRAPHVIZ_PLUGIN_NAME);
+		$wps_graphviz_install_link  = WP_SoaVis_Activator::wps_install_link(WPS_WP_GRAPHVIZ_PLUGIN_SLUG);
+		$wps_graphviz_activate_link = WP_SoaVis_Activator::wps_activate_link(WPS_WP_GRAPHVIZ_PLUGIN_FILE);
+		$notice .= sprintf(__('Please <a href="%s">install</a> and <a href="%s">activate</a> at least version %s of %s and try again.', WPS_PLUGIN),
+						$wps_graphviz_install_link, $wps_graphviz_activate_link, WPS_WP_GRAPHVIZ_MINIMUM_VERSION, WPS_WP_GRAPHVIZ_PLUGIN_NAME);
 		$notice .= '<br/>';
 		$notice .= '</p>';
 		$notice .= '</div>';
@@ -134,7 +136,7 @@ function wps_check_wp_graphviz_notice() {
 		echo $notice;
 
 		// Deactivate ths plugin
-		wps_manually_deactivate();
+		wps_manually_deactivate( WP_SOAVIS_PLUGIN_BASENAME );
 	}
 }
 add_action( 'admin_notices', 'wps_check_wp_graphviz_notice');

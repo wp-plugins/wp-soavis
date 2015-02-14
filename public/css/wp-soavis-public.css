@@ -104,14 +104,14 @@ div#wp_soavis_info_box.alignleft {
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	max-width: 98%;
-	margin: 1% 1% 1% 0;
+	margin: 1% 3% 1% 0;
 }
 div#wp_soavis_graph_box.alignright,
 div#wp_soavis_info_box.alignright {
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	max-width: 98%;
-	margin: 1% 0 1% 1%;
+	margin: 1% 0 1% 3%;
 }
 div#wp_soavis_graph_box.aligncenter,
 div#wp_soavis_info_box.aligncenter {

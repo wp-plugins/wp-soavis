@@ -370,19 +370,21 @@ class WP_SoaVis_Shortcodes {
 		}
 		$wps_shortcode_output_list .= '</div>';
 
-		// Generate the optional title
-		if ($wps_atts['title']) {
-			$wps_shortcode_output .= '<h2>' . $wps_atts['title'] . '</h2>';
-		}
-
 		// Generate a WP_GraphViz shortcode command
 		$wps_graphviz_input   = '';
 		$wps_graphviz_input  .= '[WP_GraphViz type="digraph"]';
 		$wps_graphviz_input  .= $wps_shortcode_output_text;
 		$wps_graphviz_input  .= '[/WP_GraphViz]';
 		$wps_graphviz_output  = do_shortcode($wps_graphviz_input);
+		$this->debugMP('pr',__FUNCTION__ . ' wps_shortcode_output_text:', $wps_shortcode_output_text);
 
 		$wps_shortcode_output .= '<div id="wp_soavis_graph_box" class="' . $alignment . '">';
+
+		// Generate the optional title
+		if ($wps_atts['title']) {
+			$wps_shortcode_output .= '<h2>' . $wps_atts['title'] . '</h2>';
+		}
+
 		$wps_shortcode_output .= '<div id="wp_soavis_graph_box_inner" class="alignleft">';
 		$wps_shortcode_output .= $wps_graphviz_output;
 		$wps_shortcode_output .= '</div>';

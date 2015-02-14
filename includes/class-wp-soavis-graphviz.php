@@ -26,6 +26,7 @@ define ('SOAVIS_NODE_FORMAT_DEFAULT_LAST',				'style=filled');
 define ('SOAVIS_NODE_FORMAT_FILL_COLOR_START',			'fillcolor=orange,');
 define ('SOAVIS_NODE_FORMAT_FILL_COLOR_DOWN',			'fillcolor=yellow,');
 define ('SOAVIS_NODE_FORMAT_FILL_COLOR_UP',				'fillcolor=springgreen,');
+define ('SOAVIS_NODE_FORMAT_FILL_COLOR_NONE',			'fillcolor=red,');
 define ('SOAVIS_NODE_FORMAT_FILL_COLOR_DEFAULT',		'fillcolor=grey,fontcolor=white,');
 
 define ('SOAVIS_NODE_FORMAT_SHAPE_SERVICE',				'shape=box,');
@@ -83,6 +84,13 @@ class WP_SoaVis_GraphViz {
 	 * @var array() $edge_list
 	 */
 	public $edge_list = array();
+
+	/**
+	 * The maximum level to traverse the network graph
+	 *
+	 * @var integer $max_graph_level
+	 */
+	public $max_graph_level = WP_SOAVIS_MAX_GRAPH_LEVEL_DEFAULT;
 
 	/**
 	 * Init the model.
@@ -283,6 +291,7 @@ class WP_SoaVis_GraphViz {
 
 		// Refresh the node_list
 		$this->node_list = array();
+		$this->max_graph_level = wps_get_option('wp_soavis_max_graph_level');
 
 		// Create the service tree in both directions up and down
 		foreach ($post_list as $cur_post) {
@@ -317,7 +326,7 @@ class WP_SoaVis_GraphViz {
 
 		// Handle the max_graph_level check
 		$level++;
-		if ($level > wps_get_option('wp_soavis_max_graph_level')) {
+		if (($level > $this->max_graph_level) && ($this->max_graph_level != 0)) {
 			$this->debugMP('msg',__FUNCTION__ . ' returned for LEVEL ' . $level . ', post_title = !' . $post_title . '!');
 			return;
 		}
@@ -344,6 +353,13 @@ class WP_SoaVis_GraphViz {
 					$this->get_node_list_data_down($cur_post, $level);
 				}
 				$child_nodes[] = $cur_post->ID;
+			} else {
+				// Get the node_data of a non-defined service
+				$cur_node = $this->get_node_data( $ref_title, $level, 'down' );
+				if (!isset($this->node_list[$cur_node['ID']])){
+					$this->node_list[$cur_node['ID']] = $cur_node;
+				}
+				$child_nodes[] = $cur_node['ID'];
 			}
 		}
 
@@ -375,7 +391,7 @@ class WP_SoaVis_GraphViz {
 
 		// Handle the level check
 		$level++;
-		if ($level > 3) {
+		if (($level > $this->max_graph_level) && ($this->max_graph_level != 0)) {
 			$this->debugMP('msg',__FUNCTION__ . ' returned for LEVEL ' . $level . ', post_title = !' . $post_title . '!');
 			return;
 		}
@@ -399,6 +415,13 @@ class WP_SoaVis_GraphViz {
 
 						$parent_nodes[] = $ref_id->post_id;
 					}
+				} else {
+					// Get the node_data of a non-defined service
+					$cur_node = $this->get_node_data( $ref_id->post_id, $level, 'up' );
+					if (!isset($this->node_list[$cur_node['ID']])){
+						$this->node_list[$cur_node['ID']] = $cur_node;
+					}
+					$parent_nodes[] = $cur_node['ID'];
 				}
 			} else {
 				$parent_nodes[] = $ref_id->post_id;
@@ -418,16 +441,31 @@ class WP_SoaVis_GraphViz {
 	protected function get_node_data( $post_in, $level = 0, $direction = 'base' ) {
 		$node_data = array();
 
-		$node_data['ID']         = $post_in->ID;
-		$node_data['url']        = get_post_permalink($post_in->ID);
-		$node_data['guid']       = $post_in->guid;
-		$node_data['post_name']  = $post_in->post_name;
-		$node_data['post_title'] = $post_in->post_title;
-		$node_data['post_type']  = $post_in->post_type;
-		$node_data['type']       = ucwords(str_replace('soavis_', '', $post_in->post_type));
-		$node_data['level']      = $level;
-		$node_data['direction']  = $direction;
+		// Validate the input to be a WP_Post
+		if (is_a($post_in, 'WP_Post')) {
+			$node_data['ID']         = $post_in->ID;
+			$node_data['url']        = get_post_permalink($post_in->ID);
+			$node_data['guid']       = $post_in->guid;
+			$node_data['post_name']  = $post_in->post_name;
+			$node_data['post_title'] = $post_in->post_title;
+			$node_data['post_type']  = $post_in->post_type;
+			$node_data['type']       = ucwords(str_replace('soavis_', '', $post_in->post_type));
+			$node_data['level']      = $level;
+			$node_data['direction']  = $direction;
 //		$this->debugMP('pr',__FUNCTION__ . ' node_data:', $node_data);
+		} else {
+			$node_ID = sanitize_title($post_in);
+			$node_ID = str_replace('-', '_', $node_ID);
+			$node_data['ID']         = $node_ID;
+			$node_data['url']        = '';
+			$node_data['guid']       = '';
+			$node_data['post_name']  = sanitize_title($post_in);
+			$node_data['post_title'] = $post_in;
+			$node_data['post_type']  = 'soavis_service';
+			$node_data['type']       = ucwords(str_replace('soavis_', '', $node_data['post_type']));
+			$node_data['level']      = $level;
+			$node_data['direction']  = 'none';
+		}
 
 		return $node_data;
 	}
@@ -490,7 +528,9 @@ class WP_SoaVis_GraphViz {
 		$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_LABEL, $node_data['post_title']);
 
 		// Add the url to the details for this node
-		$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $node_data['url']);
+		if ($node_data['url']) {
+			$str_graphviz_text_node .= sprintf(SOAVIS_GRAPHVIZ_IMAGE_RENDER_URL, $node_data['url']);
+		}
 
 		// Get some formatting parameters
 		$str_graphviz_text_node .= $this->get_node_format_color($node_data);
@@ -616,6 +656,9 @@ class WP_SoaVis_GraphViz {
 					break;
 				case 'up':
 					$str_fill_color_format .= SOAVIS_NODE_FORMAT_FILL_COLOR_UP;
+					break;
+				case 'none':
+					$str_fill_color_format .= SOAVIS_NODE_FORMAT_FILL_COLOR_NONE;
 					break;
 				default:
 					$str_fill_color_format .= SOAVIS_NODE_FORMAT_FILL_COLOR_DEFAULT;

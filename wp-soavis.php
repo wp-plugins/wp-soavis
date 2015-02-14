@@ -12,7 +12,7 @@
  * Plugin Name:       WP SoaVis
  * Plugin URI:        http://www.soavis.eu
  * Description:       A plugin to provide SoaVis functionality for WordPress sites.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Author:            De B.A.A.T.
  * Author URI:        https://www.de-baat.nl/WP_SoaVis
  * License:           GPLv3
@@ -28,11 +28,13 @@ if ( ! defined( 'WPINC' ) ) {
 
 //	WP_SoaVis definitions
 if ( ! defined( 'WP_SOAVIS_VERSION' ) ) {
-	define( 'WP_SOAVIS_VERSION',				'0.3.0' );
+	define( 'WP_SOAVIS_VERSION',				'0.4.0' );
 	define( 'WP_SOAVIS_VERSION_NAME',			'wp_soavis_version' );
 	define( 'WP_SOAVIS_LINK',					'http://www.soavis.eu' );
+	define( 'WP_SOAVIS_SAMPLE_LINK',			'http://www.soavis.eu/wp-soavis-sample-upload' );
 	define( 'WP_SOAVIS_OPTIONS_NAME',			'wp-soavis-options' ); // Option name for save settings
 	define( 'WP_SOAVIS_DISPLAY_NAME',			'WP SoaVis' );
+	define( 'WP_SOAVIS_MAX_GRAPH_LEVEL_DEFAULT', 5 );
 
 	define( 'WP_SOAVIS_URL',					plugins_url('', __FILE__) );
 	define( 'WP_SOAVIS_DIR',					rtrim(plugin_dir_path(__FILE__), '/') );
@@ -47,8 +49,10 @@ if ( ! defined( 'WPS_WP_GRAPHVIZ_MINIMUM_VERSION' ) ) {
 	define( 'WPS_WP_GRAPHVIZ_MINIMUM_VERSION',	'1.1.0' );
 	define( 'WPS_WP_GRAPHVIZ_PLUGIN_NAME',		'WP GraphViz' );
 	define( 'WPS_WP_GRAPHVIZ_PLUGIN_SLUG',		'wp-graphviz' );
+	define( 'WPS_WP_GRAPHVIZ_PLUGIN_FILE',		'wp-graphviz/wp-graphviz.php' );
 	define( 'WPS_WP_GRAPHVIZ_PLUGIN_URI',		'https://wordpress.org/extend/plugins/wp-graphviz/' );
 	define( 'WPS_WP_GRAPHVIZ_DOWNLOAD_URL',		'https://wordpress.org/plugins/wp-graphviz/' );
+	define( 'WPS_WP_GRAPHVIZ_INSTALL_URL',		'/wp-admin/update.php?action=install-plugin&plugin=wp-graphviz' );
 }
 
 /**

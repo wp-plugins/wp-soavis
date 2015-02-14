@@ -30,6 +30,11 @@
 
 	<br/>
 	<br/>
+	<p><?php echo sprintf(__('Download a set of example entities via <a href="%s">%s</a>.', $this->plugin_name), WP_SOAVIS_SAMPLE_LINK, WP_SOAVIS_SAMPLE_LINK); ?></p>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 	<br/>
 	<br/>
 	<br/>

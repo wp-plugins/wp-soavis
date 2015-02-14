@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP_SoaVis 0.1.0\n"
 "Report-Msgid-Bugs-To: http://www.de-baat.nl/WP_SoaVis\n"
-"POT-Creation-Date: 2015-02-09 16:23+0100\n"
-"PO-Revision-Date: 2015-02-09 16:23+0100\n"
+"POT-Creation-Date: 2015-02-14 17:46+0100\n"
+"PO-Revision-Date: 2015-02-14 17:46+0100\n"
 "Last-Translator: De BAAT <De_BAAT@de-baat.nl>\n"
 "Language-Team: Jan de Baat <WP_SoaVis@de-baat.nl>\n"
 "Language: nl_NL\n"
@@ -19,23 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: wp-soavis.php:116
-#, php-format
-msgid "%s has been deactivated."
-msgstr ""
-
-#: wp-soavis.php:123
-#, php-format
-msgid "This plugin requires %s to be installed and active."
-msgstr ""
-
-#: wp-soavis.php:134
-#, php-format
-msgid ""
-"Please <a href=\"%s\">download</a> and install at least version %s of %s and "
-"try again."
-msgstr ""
-
 #: admin/class-wp-soavis-admin.php:110 admin/class-wp-soavis-admin.php:111
 msgid "WP SoaVis"
 msgstr ""
@@ -44,53 +27,92 @@ msgstr ""
 msgid "SoaVis Shortcodes"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:142
+#: admin/class-wp-soavis-admin.php:130 admin/class-wp-soavis-admin.php:131
+#, fuzzy
+msgid "SoaVis Settings"
+msgstr "Algemene Instellingen"
+
+#: admin/class-wp-soavis-admin.php:155
+#, fuzzy
+msgid "General Settings"
+msgstr "Algemene Instellingen"
+
+#: admin/class-wp-soavis-admin.php:162
+msgid "Max Graph Level"
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:199
+msgid "Manage your SoaVis settings below."
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:210
+msgid "The maximum level to traverse the service network. "
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:211
+#, php-format
+msgid ""
+"Must be a positive integer, any invalid value will render to the default "
+"value of %d. "
+msgstr ""
+
+#: admin/class-wp-soavis-admin.php:226
 msgid "Shortcodes"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:146
+#: admin/class-wp-soavis-admin.php:230
 msgid "Your Settings have been saved."
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:151
+#: admin/class-wp-soavis-admin.php:235
 msgid "This page shows the shortcodes supported by the WP SoaVis plugin:"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:159
+#: admin/class-wp-soavis-admin.php:243
 msgid "Description"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:160
+#: admin/class-wp-soavis-admin.php:244
 msgid "Parameters"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:183
+#: admin/class-wp-soavis-admin.php:267
 msgid ""
 "<br/>This plugin supports the shortcodes as shown above as well as in all "
 "upper and lower case."
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:184
+#: admin/class-wp-soavis-admin.php:268
 #, php-format
 msgid "<br/>More information can be found <a href=\"%s\">here</a>."
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:185
+#: admin/class-wp-soavis-admin.php:269
 #, php-format
 msgid ""
 "<br/>If you have suggestions to improve this plugin, please leave a comment "
 "on this same <a href=\"%s\">page</a>."
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:371
+#: admin/class-wp-soavis-admin.php:455
 msgid "SoaVis Information"
 msgstr ""
 
-#: admin/class-wp-soavis-admin.php:474
+#: admin/class-wp-soavis-admin.php:558
 msgid "SoaVis Shortcode"
 msgstr ""
 
-#: includes/class-wp-soavis-graphviz.php:110
+#: admin/partials/wp-soavis-admin-display.php:33
+#, php-format
+msgid "Download a set of example entities via <a href=\"%s\">%s</a>."
+msgstr ""
+
+#: admin/partials/wp-soavis-admin-display.php:41
+#, php-format
+msgid "wp-soavis version %s."
+msgstr ""
+
+#: includes/class-wp-soavis-graphviz.php:118
 #: includes/class-wp-soavis-post-types.php:87
 msgid "Service"
 msgstr ""
@@ -131,58 +153,58 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:131
+#: includes/class-wp-soavis-post-types.php:143
 msgid "Version"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:137
+#: includes/class-wp-soavis-post-types.php:149
 msgid "Last Updated"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:143
+#: includes/class-wp-soavis-post-types.php:155
 msgid "Visibility"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:167
+#: includes/class-wp-soavis-post-types.php:179
 msgid "Add New"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:168
+#: includes/class-wp-soavis-post-types.php:180
 #, php-format
 msgid "Add New %s"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:169
+#: includes/class-wp-soavis-post-types.php:181
 #, php-format
 msgid "Edit %s"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:170
+#: includes/class-wp-soavis-post-types.php:182
 #, php-format
 msgid "New %s"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:171
+#: includes/class-wp-soavis-post-types.php:183
 #, php-format
 msgid "View %s"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:172
+#: includes/class-wp-soavis-post-types.php:184
 #, php-format
 msgid "Search %s"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:173
+#: includes/class-wp-soavis-post-types.php:185
 #, php-format
 msgid "No %s found"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:174
+#: includes/class-wp-soavis-post-types.php:186
 #, php-format
 msgid "No %s found in trash"
 msgstr ""
 
-#: includes/class-wp-soavis-post-types.php:175
+#: includes/class-wp-soavis-post-types.php:187
 #, php-format
 msgid "SoaVis %s"
 msgstr ""
@@ -379,43 +401,56 @@ msgstr ""
 
 #: includes/class-wp-soavis-shortcodes.php:337
 #: includes/class-wp-soavis-shortcodes.php:352
-#: includes/class-wp-soavis-shortcodes.php:447
-#: includes/class-wp-soavis-shortcodes.php:460
-#: includes/class-wp-soavis-shortcodes.php:521
-#: includes/class-wp-soavis-shortcodes.php:534
+#: includes/class-wp-soavis-shortcodes.php:449
+#: includes/class-wp-soavis-shortcodes.php:462
+#: includes/class-wp-soavis-shortcodes.php:523
+#: includes/class-wp-soavis-shortcodes.php:536
 msgid "No dependencies found."
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:397
+#: includes/class-wp-soavis-shortcodes.php:399
 msgid "Graph Dependencies Text"
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:595
-#: includes/class-wp-soavis-shortcodes.php:608
+#: includes/class-wp-soavis-shortcodes.php:597
+#: includes/class-wp-soavis-shortcodes.php:610
 msgid "No references found."
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:665
+#: includes/class-wp-soavis-shortcodes.php:667
 msgid "No post found."
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:755
+#: includes/class-wp-soavis-shortcodes.php:757
 #, php-format
 msgid "No entities found for type %s."
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:829
+#: includes/class-wp-soavis-shortcodes.php:831
 msgid "No header information to display."
 msgstr ""
 
-#: includes/class-wp-soavis-shortcodes.php:856
+#: includes/class-wp-soavis-shortcodes.php:858
 #, php-format
 msgid "No information to display for post %s."
 msgstr ""
 
-#, fuzzy
-#~ msgid "General Settings"
-#~ msgstr "Algemene Instellingen"
+#: includes/wp-soavis-functions.php:122
+#, php-format
+msgid "%s has been deactivated."
+msgstr ""
+
+#: includes/wp-soavis-functions.php:125
+#, php-format
+msgid "This plugin requires %s to be installed and active."
+msgstr ""
+
+#: includes/wp-soavis-functions.php:130
+#, php-format
+msgid ""
+"Please <a href=\"%s\">install</a> and <a href=\"%s\">activate</a> at least "
+"version %s of %s and try again."
+msgstr ""
 
 #, fuzzy
 #~ msgid "Post tags"

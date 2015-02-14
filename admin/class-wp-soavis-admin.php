@@ -174,8 +174,12 @@ class WP_SoaVis_Admin {
 		// Always set the current version
 		$newinput[WP_SOAVIS_VERSION_NAME] = WP_SOAVIS_VERSION;
 
-		// Check value of wp_soavis_max_graph_level
-		$newinput['wp_soavis_max_graph_level'] = trim($input['wp_soavis_max_graph_level']);
+		// Check value of wp_soavis_max_graph_level which should be a positive integer
+		if (filter_var($input['wp_soavis_max_graph_level'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1)))) {
+			$newinput['wp_soavis_max_graph_level'] = (int) trim($input['wp_soavis_max_graph_level']);
+		} else {
+			$newinput['wp_soavis_max_graph_level'] = WP_SOAVIS_MAX_GRAPH_LEVEL_DEFAULT;
+		}
 
 		return $newinput;
 	}
@@ -202,7 +206,9 @@ class WP_SoaVis_Admin {
 		$wp_soavis_max_graph_level = wps_get_option('wp_soavis_max_graph_level');
 		$wp_soavis_max_graph_level_name = WP_SOAVIS_OPTIONS_NAME . '[wp_soavis_max_graph_level]';
 		?><input type="text" id="input_wp_soavis_max_graph_level" name="<?php echo $wp_soavis_max_graph_level_name; ?>" value="<?php echo $wp_soavis_max_graph_level;?>" />
-		<?php  echo __(' The maximum level to traverse the service network, use <strong>0</strong> to omit this check.', $this->plugin_name);
+		<?php
+		echo ' ' . __('The maximum level to traverse the service network. ', $this->plugin_name);
+		echo sprintf(__('Must be a positive integer, any invalid value will render to the default value of %d. ', $this->plugin_name), WP_SOAVIS_MAX_GRAPH_LEVEL_DEFAULT);
 	}
 
 	/**

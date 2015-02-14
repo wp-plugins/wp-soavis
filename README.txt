@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: DeBAAT
-Donate link: http://www.soavis.eu
+Donate link: https://www.soavis.eu
 Tags: comments, spam
 Requires at least: 4.1
 Tested up to: 4.1
-Stable tag: 0.3.0
+Stable tag: 0.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,6 +16,8 @@ A Service Oriented Architecture is primarily based on the definition and co-oper
 
 This plugin provides a means to manage and visualise the existing service base. With the use of shortcodes, the network of service relations can be visualised. As the relations can change over time, the visualisation is dynamically generated every time it is shown on the site.
 
+Download a set of example entities via [https://www.soavis.eu/wp-soavis-sample-upload]. This page also shows how to upload that set.
+
 The main visualisation is provided by [GraphViz](http://www.graphviz.org/), a powerful tool for visualising network and tree structures that connect objects. It has been implemented in the [WP GraphViz](https://wordpress.org/plugins/wp-graphviz/) plugin. Hence the dependency check.
 
 == Installation ==
@@ -24,7 +26,7 @@ This section describes how to install the plugin and get it working.
 
 1. Upload the contents of the `wp-soavis.zip` to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Define new services, projects, components, systems.
+1. Define new services, projects, components, systems, chains.
 1. Use shortcodes as described in the documentation in your posts or pages.
 
 == Frequently Asked Questions ==
@@ -33,7 +35,7 @@ This section describes how to install the plugin and get it working.
 
 Create definitions for services, components, projects, systems using the custom post type sub menu's in the WP SoaVis menu. Use the meta tag 'ServiceDependency' to define on which services this service depends.
 Use the `[soavis_*]` shortcodes in the post body to show the desired information. The sub menu 'SoaVis Shortcodes' shows an overview of the shortcodes supported, including a list of parameters to be used per shortcode.
-See the site for more explanations and a demo: [soavis.eu](http://www.soavis.eu).
+See the site for more explanations and a demo: [soavis.eu](https://www.soavis.eu).
 
 = What is GraphViz? =
 
@@ -51,6 +53,13 @@ Almost any kind of diagram where something _connects_ to something else can be d
 
 == Changelog ==
 
+= 0.4.0 =
+* Fixed handling of max_graph_level.
+* Fixed handling of WP GraphViz dependency.
+* Added support for non-defined services.
+* Added link for uploading sample entities.
+* Added Dutch translation (nl_NL).
+
 = 0.3.0 =
 * Fixed version of stable tag.
 * Added setting for traverse network level.
@@ -66,6 +75,9 @@ Almost any kind of diagram where something _connects_ to something else can be d
 * First version starting the plugin.
 
 == Upgrade Notice ==
+
+= 0.4.0 =
+* Fixed some small issues and added some small functionality, see changelog.
 
 = 0.3.0 =
 * Fixed some small issues and added some small functionality, see changelog.
