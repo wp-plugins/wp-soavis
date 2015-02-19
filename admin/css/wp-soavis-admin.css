@@ -1,0 +1,73 @@
+/**
+ * All of the CSS for your dashboard-specific functionality should be
+ * included in this file.
+ */
+
+/***************************
+ * GraphViz Colors:
+ *	springgreen:	#00FF7F
+ *	orange:			#FFA500
+ *	yellow:			#FFFF00
+ *	See http://www.graphviz.org/content/color-names for more colors.
+ */
+
+/***************************
+ * Shortcodes
+ */
+th.wp_soavis_shortcodes_cell {
+	padding: 8px 15px;
+}
+td.wp_soavis_shortcodes_cell {
+    display: table-cell;
+    word-wrap: break-word;
+    word-break: keep-all;
+	padding: 8px 15px;
+}
+.wp_soavis_shortcodes_cell ul {
+    list-style: disc outside none;
+	margin: 0;
+}
+tr.wp_soavis_shortcodes_row.even {
+    background-color: #FFFFFF;
+}
+tr.wp_soavis_shortcodes_row.even:hover {
+    background-color: #FFFFCC;
+}
+tr.wp_soavis_shortcodes_row.odd {
+    background-color: #DDDDDD;
+}
+tr.wp_soavis_shortcodes_row.odd:hover {
+    background-color: #FFFF99;
+}
+tr.wp_soavis_shortcodes_row.invalid {
+    background-color: #FFCCCC;
+}
+tr.wp_soavis_shortcodes_row.invalid:hover {
+    background-color: #FFDDDD;
+}
+#wp_soavis_shortcodes_table {
+   margin: 0px;
+   padding: 0px;
+}
+#wp_soavis_shortcodes_table th {
+    vertical-align: top;
+    background: #404040; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr=' #404040'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#808080), to( #404040)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #808080,   #404040); /* for firefox 3.6+ */
+    background-image: -moz-linear-gradient(center top , #808080, #404040);
+    text-decoration: none;
+	font-size: 14px;
+    color: #00FF00;
+    text-shadow: none;
+    font-weight: 500;
+    font-family: "Trebuchet MS", Helvetica, sans-serif; 
+}
+#wp_soavis_shortcodes_table th.thnowrap {
+    white-space: nowrap;
+}
+div#wp_soavis_table_wrapper {
+	border: 1px solid #CCCCCC;
+	margin: -1px 0 0;
+	padding: 0px;
+}

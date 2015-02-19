@@ -1,0 +1,141 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+/***************************
+ * Shortcodes
+ */
+th.wp_soavis_shortcodes_cell {
+	padding: 8px 15px;
+}
+td.wp_soavis_shortcodes_cell {
+    display: table-cell;
+    word-wrap: break-word;
+    word-break: keep-all;
+	padding: 8px 15px;
+}
+.wp_soavis_shortcodes_cell ul {
+    list-style: disc outside none;
+	margin: 0;
+}
+tr.wp_soavis_shortcodes_row.even {
+    background-color: #FFFFFF;
+}
+tr.wp_soavis_shortcodes_row.even:hover {
+    background-color: #FFFFCC;
+}
+tr.wp_soavis_shortcodes_row.odd {
+    background-color: #DDDDDD;
+}
+tr.wp_soavis_shortcodes_row.odd:hover {
+    background-color: #FFFF99;
+}
+tr.wp_soavis_shortcodes_row.invalid {
+    background-color: #FFCCCC;
+}
+tr.wp_soavis_shortcodes_row.invalid:hover {
+    background-color: #FFDDDD;
+}
+#wp_soavis_shortcodes_table {
+    margin: 0px;
+    padding: 5px;
+}
+#wp_soavis_shortcodes_table th {
+    vertical-align: top;
+    background: #404040; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr=' #404040'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#808080), to( #404040)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #808080,   #404040); /* for firefox 3.6+ */
+    background-image: -moz-linear-gradient(center top , #808080, #404040);
+    text-decoration: none;
+	font-size: 14px;
+    color: #00FF00;
+    padding: 5px;
+    text-shadow: none;
+    font-weight: 500;
+    font-family: "Trebuchet MS", Helvetica, sans-serif; 
+}
+#wp_soavis_shortcodes_table td {
+    vertical-align: top;
+    background: #FFFFFF; /* for non-css3 browsers */
+	border: 1px solid #AAAAAA;
+	font-size: 12px;
+    padding: 5px;
+    color: #404040;
+    text-shadow: none;
+}
+#wp_soavis_shortcodes_table th.thnowrap {
+    white-space: nowrap;
+}
+div#wp_soavis_table_wrapper {
+	border: 1px solid #888888;
+	margin: -1px 0 0;
+	padding: 1%;
+}
+
+div#wp_soavis_graph_box {
+	border: 1px solid #888888;
+	padding: 1%;
+    color: #00FF00;
+    background: #404040; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr=' #404040'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#808080), to( #404040)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #808080,   #404040); /* for firefox 3.6+ */
+    background-image: -moz-linear-gradient(center top , #808080, #404040);
+}
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+div#wp_soavis_info_box {
+	border: 1px solid #888888;
+	padding: 1%;
+    color: #00FF00;
+    background: #404040; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr=' #404040'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#808080), to( #404040)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #808080,   #404040); /* for firefox 3.6+ */
+    background-image: -moz-linear-gradient(center top , #808080, #404040);
+}
+div#wp_soavis_graph_box.alignleft,
+div#wp_soavis_info_box.alignleft {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	max-width: 98%;
+	margin: 1% 3% 1% 0;
+}
+div#wp_soavis_graph_box.alignright,
+div#wp_soavis_info_box.alignright {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	max-width: 98%;
+	margin: 1% 0 1% 3%;
+}
+div#wp_soavis_graph_box.aligncenter,
+div#wp_soavis_info_box.aligncenter {
+	margin: auto;
+	width: 90%;
+}
+#wp_soavis_graph_box h2,
+#wp_soavis_info_box h2 {
+    font-size: 16px;
+    color: #00FF00;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+#wp_soavis_graph_box img,
+#wp_soavis_info_box img {
+	max-width: 20px;
+    text-align: center;
+}
+div#wp_soavis_graph_box_inner svg {
+	max-width: 100%;
+	height: auto;
+}
+div#wp_soavis_graph_box_inner {
+	max-width: 100%;
+	margin: 0;
+}
