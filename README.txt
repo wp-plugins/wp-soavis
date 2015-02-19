@@ -4,7 +4,7 @@ Donate link: https://www.soavis.eu
 Tags: comments, spam
 Requires at least: 4.1
 Tested up to: 4.1
-Stable tag: 0.4.0
+Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,6 +53,12 @@ Almost any kind of diagram where something _connects_ to something else can be d
 
 == Changelog ==
 
+= 1.0.0 =
+* Fixed size and floating of graphs.
+* Fixed display of number of entities in list view.
+* Added shortcode support for start_nodes, filter, show_number and search parameters.
+* Updated nl_NL translations.
+
 = 0.4.0 =
 * Fixed handling of max_graph_level.
 * Fixed handling of WP GraphViz dependency.
@@ -75,6 +81,9 @@ Almost any kind of diagram where something _connects_ to something else can be d
 * First version starting the plugin.
 
 == Upgrade Notice ==
+
+= 1.0.0 =
+* Fixed some small issues and added some functionality, see changelog.
 
 = 0.4.0 =
 * Fixed some small issues and added some small functionality, see changelog.

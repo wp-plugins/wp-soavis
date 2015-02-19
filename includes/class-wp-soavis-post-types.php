@@ -467,6 +467,19 @@ class WP_SoaVis_Post_Types {
 	}
 
 	/**
+	 * Return the Custom Post Type that SoaVis uses.
+	 *
+	 * @return string The used Custom Post Type.
+	 */
+	public function get_post_type_slugs() {
+		$type_slugs = array();
+		foreach ($this->post_types as $key => $value) {
+			$type_slugs[] = $key;
+		}
+		return $type_slugs;
+	}
+
+	/**
 	 * Simplify the parent debugMP interface.
 	 *
 	 * @param string $type

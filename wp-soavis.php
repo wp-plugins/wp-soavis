@@ -12,7 +12,7 @@
  * Plugin Name:       WP SoaVis
  * Plugin URI:        http://www.soavis.eu
  * Description:       A plugin to provide SoaVis functionality for WordPress sites.
- * Version:           0.4.0
+ * Version:           1.0.0
  * Author:            De B.A.A.T.
  * Author URI:        https://www.de-baat.nl/WP_SoaVis
  * License:           GPLv3
@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 //	WP_SoaVis definitions
 if ( ! defined( 'WP_SOAVIS_VERSION' ) ) {
-	define( 'WP_SOAVIS_VERSION',				'0.4.0' );
+	define( 'WP_SOAVIS_VERSION',				'1.0.0' );
 	define( 'WP_SOAVIS_VERSION_NAME',			'wp_soavis_version' );
 	define( 'WP_SOAVIS_LINK',					'http://www.soavis.eu' );
 	define( 'WP_SOAVIS_SAMPLE_LINK',			'http://www.soavis.eu/wp-soavis-sample-upload' );

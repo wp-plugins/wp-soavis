@@ -138,7 +138,7 @@ class WP_SoaVis_Shortcodes {
 									__('Default value is: <code>left</code>.', $this->plugin_name) .
 									'</li>' .
 									'<li>' .
-									__('<strong>start_nodes</strong>="&lt;slug&gt;"', $this->plugin_name) .
+									__('<strong>start_nodes</strong>="&lt;ID&gt;,&lt;Title&gt;"', $this->plugin_name) .
 									'<br/>' .
 									__('With this value, a list can be defined to be used as starting point for the graph tree. ', $this->plugin_name) .
 									__('The value should be a comma separated list of post IDs or titles. ', $this->plugin_name) .
@@ -174,15 +174,29 @@ class WP_SoaVis_Shortcodes {
 									__('Default value is empty, thus showing no title.', $this->plugin_name) .
 									'</li>' .
 									'<li>' .
-									__('<strong>filter</strong>="&lt;slug&gt;"', $this->plugin_name) .
+									__('<strong>filter</strong>="&lt;key=value;&gt;"', $this->plugin_name) .
 									'<br/>' .
-									__('A set of parameters that can be used to filter the list.', $this->plugin_name) .
+									__('A set of parameters that can be used to filter the list. ', $this->plugin_name) .
+									__('The parameter value must be a set of [<code>key</code>=<code>value</code>] pairs. ', $this->plugin_name) .
+									__('Sets need to be separated by the "<code>;</code>" character. ', $this->plugin_name) .
+									__('The texts for <code>key</code> and <code>value</code> need to be separated by the "<code>=</code>" character. ', $this->plugin_name) .
+									__('The <code>key</code> will be matched with a meta_key as stored with a post, e.g. the value "Document" will match with meta_key "RelatedDocument". ', $this->plugin_name) .
+									__('The <code>value</code> will be matched as a LIKE with the meta_value related to the meta_key found for the corresponding <code>key</code>. ', $this->plugin_name) .
+									__('When multiple pairs are defined, only entities will be found that match ALL filter pairs. ', $this->plugin_name) .
 									'</li>' .
-//									'<li>' .
-//									__('<strong>table_class</strong>="&lt;slug&gt;"', $this->plugin_name) .
-//									'<br/>' .
-//									__('The <code>class</code> to format the looks of the table to show.', $this->plugin_name) .
-//									'</li>' .
+									'<li>' .
+									__('<strong>search</strong>="&lt;text&gt;"', $this->plugin_name) .
+									'<br/>' .
+									__('A parameter that can be used to search the entities requested. ', $this->plugin_name) .
+									__('The parameter value must be a text string. ', $this->plugin_name) .
+									'</li>' .
+									'<li>' .
+									__('<strong>show_number</strong>="&lt;text&gt;"', $this->plugin_name) .
+									'<br/>' .
+									__('A parameter that determines whether or not to show the number of entities found. ', $this->plugin_name) .
+									__('If the value of <code>text</code> is "NO", the number is not shown; any other value will show the number. ', $this->plugin_name) .
+									__('Default value is empty, thus showing the number.', $this->plugin_name) .
+									'</li>' .
 								 '</ul>',
 			),
 			'soavis_dependencies' => array(
@@ -314,6 +328,7 @@ class WP_SoaVis_Shortcodes {
 		$wps_atts = shortcode_atts(array(
 			'title'       => 'Dependencies Graph',
 			'alignment'   => 'left',
+			'start_nodes' => '',
 			'show_list'   => 'NO',
 			'show_text'   => 'NO',
 		), $attr);
@@ -336,7 +351,16 @@ class WP_SoaVis_Shortcodes {
 		if (!$wps_post) {
 			$wps_shortcode_output_list .= __('No dependencies found.', $this->plugin_name);
 		} else {
-			$wps_shortcode_output_text = $this->plugin->wps_graphviz->get_graphviz_output($wps_post->ID);
+
+			// Generate the list of start_nodes as list of IDs or just the ID of the current post
+			$wps_start_nodes_list = array();
+			if ($wps_atts['start_nodes']) {
+				$wps_start_nodes_list = $this->get_start_node_list($wps_atts['start_nodes']);
+			} else {
+				$wps_start_nodes_list[] = $wps_post->ID;
+			}
+
+			$wps_shortcode_output_text = $this->plugin->wps_graphviz->get_graphviz_output($wps_start_nodes_list);
 			$wps_nodes_list = $this->plugin->wps_graphviz->node_list;
 
 //			$this->debugMP('pr',__FUNCTION__ . ' wps_post', $wps_post);
@@ -376,7 +400,8 @@ class WP_SoaVis_Shortcodes {
 		$wps_graphviz_input  .= $wps_shortcode_output_text;
 		$wps_graphviz_input  .= '[/WP_GraphViz]';
 		$wps_graphviz_output  = do_shortcode($wps_graphviz_input);
-		$this->debugMP('pr',__FUNCTION__ . ' wps_shortcode_output_text:', $wps_shortcode_output_text);
+		$this->debugMP('msg',__FUNCTION__ . ' wps_shortcode_output_text:<br/>' . $wps_shortcode_output_text);
+		$this->debugMP('msg',__FUNCTION__ . ' wps_graphviz_output:<br/>' . esc_html($wps_graphviz_output));
 
 		$wps_shortcode_output .= '<div id="wp_soavis_graph_box" class="' . $alignment . '">';
 
@@ -387,9 +412,6 @@ class WP_SoaVis_Shortcodes {
 
 		$wps_shortcode_output .= '<div id="wp_soavis_graph_box_inner" class="alignleft">';
 		$wps_shortcode_output .= $wps_graphviz_output;
-		$wps_shortcode_output .= '</div>';
-//		$wps_shortcode_output .= '<br style="clear: both;" />';
-		$wps_shortcode_output .= '<div class="clearfix">';
 		$wps_shortcode_output .= '</div>';
 		$wps_shortcode_output .= '</div>';
 
@@ -435,8 +457,6 @@ class WP_SoaVis_Shortcodes {
 		// Check whether the current post is defined
 		$wps_post = get_post();
 
-		$wps_shortcode_output .= '<div class="clearfix">';
-		$wps_shortcode_output .= '</div>';
 		$wps_shortcode_output .= '<div id="wp_soavis_info_box" class="' . $alignment . '">';
 
 		// Generate the optional title
@@ -509,8 +529,6 @@ class WP_SoaVis_Shortcodes {
 		// Check whether the current post is defined
 		$wps_post = get_post();
 
-		$wps_shortcode_output .= '<div class="clearfix">';
-		$wps_shortcode_output .= '</div>';
 		$wps_shortcode_output .= '<div id="wp_soavis_info_box" width="100%" class="' . $alignment . '">';
 
 		// Generate the optional title
@@ -583,8 +601,6 @@ class WP_SoaVis_Shortcodes {
 		// Check whether the current post is defined
 		$wps_post = get_post();
 
-		$wps_shortcode_output .= '<div class="clearfix">';
-		$wps_shortcode_output .= '</div>';
 		$wps_shortcode_output .= '<div id="wp_soavis_info_box" class="' . $alignment . '">';
 
 		// Generate the optional title
@@ -653,8 +669,6 @@ class WP_SoaVis_Shortcodes {
 		// Check whether the current post is defined
 		$wps_post = get_post();
 
-		$wps_shortcode_output .= '<div class="clearfix">';
-		$wps_shortcode_output .= '</div>';
 		$wps_shortcode_output .= '<div id="wp_soavis_info_box" class="' . $alignment . '">';
 
 		// Generate the optional title
@@ -701,8 +715,10 @@ class WP_SoaVis_Shortcodes {
 		$wps_atts = shortcode_atts(array(
 			'type'        => 'soavis_service',
 			'filter'      => '',
+			'search'      => '',
 			'title'       => '',
 			'table_class' => '',
+			'show_number' => '',
 		), $attr);
 
 		// Check value of type to start with soavis_
@@ -720,21 +736,41 @@ class WP_SoaVis_Shortcodes {
 		$this->debugMP('pr',__FUNCTION__ . ' attributes', $wps_atts);
 		$this->debugMP('msg',__FUNCTION__ . ' content', esc_html($content));
 
-		// Get all posts for the requested type
-		$wps_posts = get_posts(
-			array(
-				'orderby' 		   => 'post_title',
-				'order'            => 'ASC',
-				'post_type'        => $wps_atts['type'],
-				'post_status'      => 'publish',
-				'nopaging'         => true,
-				'suppress_filters' => true
-			)
-		);
+		// Set the post_query_args in combination with the filter_args
+		$post_query_args = array(	'orderby' 		   => 'post_title',
+									'order'            => 'ASC',
+									'post_type'        => $wps_atts['type'],
+									'post_status'      => 'publish',
+									'nopaging'         => true,
+									'suppress_filters' => true
+								);
+
+		// Get the meta_filter_arguments
+		$meta_filter_args = $this->get_meta_filter_arguments($wps_atts['filter']);
+		if (count($meta_filter_args) > 0) {
+			$post_query_args['meta_query'] = $meta_filter_args;
+		}
+
+		// Check the search parameter
+		if ($wps_atts['search']) {
+			$post_query_args['s'] = esc_html($wps_atts['search']);
+		}
+
+		// Get all posts for the requested type and other args
+		$wps_posts = get_posts( $post_query_args );
+		$this->debugMP('pr',__FUNCTION__ . ' post_query_args = ', $post_query_args);
 		$this->debugMP('pr',__FUNCTION__ . ' # wps_posts = ' . count($wps_posts), $wps_posts);
 
 		// Generate the output for the posts found
-		$wps_shortcode_output .= ' # wps_posts = ' . count($wps_posts) . '<br/>';
+		$wps_type_string = 'posts';
+		if (isset($this->plugin->wps_post_types->post_types[$wps_atts['type']])) {
+			$wps_type_string = $this->plugin->wps_post_types->post_types[$wps_atts['type']]['name'];
+		}
+
+		// Show_number only when requested
+		if ($wps_atts['show_number'] != 'NO') {
+			$wps_shortcode_output .= sprintf(__(' Number of <strong>%s</strong> found = %d.<br/>', $this->plugin_name), $wps_type_string, count($wps_posts));
+		}
 		$wps_shortcode_output .= $this->wps_generate_soavis_list($wps_posts, $wps_atts['type']);
 
 		return $wps_shortcode_output;
@@ -754,7 +790,13 @@ class WP_SoaVis_Shortcodes {
 
 		// Check number of posts found and generate display accordingly
 		if (!$wps_posts || (count($wps_posts) == 0)) {
-			$wps_list_output .= sprintf(__('No entities found for type %s.', $this->plugin_name), $type);
+
+			// Generate the output for no posts found
+			$wps_type_string = 'posts';
+			if (isset($this->plugin->wps_post_types->post_types[$type])) {
+				$wps_type_string = $this->plugin->wps_post_types->post_types[$type]['name'];
+			}
+			$wps_list_output .= sprintf(__(' No <strong>%s</strong> found for type %s.<br/>', $this->plugin_name), $wps_type_string, $type);
 		} else {
 			$wps_list_output .= '<div id="wp_soavis_table_wrapper">';
 			$wps_list_output .= '<table id="wp_soavis_shortcodes_table" class="wp-soavis wp-list-table widefat fixed posts" cellspacing="0">';
@@ -988,6 +1030,134 @@ class WP_SoaVis_Shortcodes {
 
 		return $wps_dependencies;
 
+	}
+
+	/**
+	 * Generate the list of start nodes to generate the GraphViz image from
+	 *
+	 * @param WP_Post $post_in The post object to start travel down the tree
+	 */
+	protected function get_start_node_list( $post_list_in ) {
+
+		$post_list      = array();
+		$post_list_base = array();
+
+		// Get a valid list of posts
+		if (is_array($post_list_in)) {
+			$post_list = $post_list_in;
+		} else {
+			$post_list = explode(',', $post_list_in);
+		}
+		$this->debugMP('pr',__FUNCTION__ . ' post_list_in:', $post_list_in);
+		$this->debugMP('pr',__FUNCTION__ . ' post_list:', $post_list);
+
+		// Create the service tree in both directions up and down
+		foreach ($post_list as $cur_post) {
+
+			if (is_numeric($cur_post)) {
+				// Use the value found as integer post_ID
+				$cur_post_int = (int) $cur_post;
+				$post_list_base[$cur_post_int] = $cur_post_int;
+			} else {
+				// Find the post_ID using the value as title
+				$post_found = get_page_by_title(trim($cur_post), OBJECT, $this->plugin->wps_post_types->get_post_type_slugs());
+				if ($post_found) {
+					$cur_post_int = $post_found->ID;
+					$post_list_base[$cur_post_int] = $cur_post_int;
+				}
+			}
+		}
+		$this->debugMP('pr',__FUNCTION__ . ' post_list_base generated:', $post_list_base);
+
+		return $post_list_base;
+	}
+
+	/**
+	 * Parse the filter_param into a set of query_args for searching the meta fields
+	 *
+	 * @param string $filter_param The string passed as parameter to parse
+	 * @return mixed $filter_args The set of query_args found 
+	 */
+	protected function get_meta_filter_arguments( $filter_param = '' ) {
+
+		$filter_args       = array();
+		$filter_args_base  = array();
+		$filter_args_query = array();
+
+		// Get a valid list of posts
+		if ($filter_param == '') {
+			return array();
+		}
+//		$this->debugMP('msg',__FUNCTION__ . ' filter_param = !' . $filter_param . '!');
+
+		$all_meta_keys = $this->get_search_meta_keys();
+		$filter_args = explode(';', $filter_param);
+		foreach ($filter_args as $filter_arg) {
+			$param = explode('=', $filter_arg);
+			$filter_args_base[] = $param;
+			// Check whether $param found indicates a meta key
+			if (isset($param[0]) && $filter_key = $this->find_filter_meta_keys($all_meta_keys, trim($param[0]))) {
+				$meta_filter = array();
+				$meta_filter['key']     = $filter_key;
+				$meta_filter['value']   = trim($param[1]);
+				$meta_filter['compare'] = 'LIKE';
+				$filter_args_query[]    = $meta_filter;
+			}
+		}
+		// Add optional relation parameter
+		if (count($filter_args_query) > 1) {
+			$filter_args_query['relation'] = 'AND';
+		}
+//		$this->debugMP('pr',__FUNCTION__ . ' filter_args:', $filter_args);
+//		$this->debugMP('pr',__FUNCTION__ . ' filter_args_base:', $filter_args_base);
+//		$this->debugMP('pr',__FUNCTION__ . ' filter_args_query:', $filter_args_query);
+//		$this->debugMP('pr',__FUNCTION__ . ' all_meta_keys:', $all_meta_keys);
+
+		return $filter_args_query;
+	}
+
+	/**
+	 * Get a list of previously defined keys.
+	 *
+	 * @return mixed
+	 */
+	function get_search_meta_keys() {
+		global $wpdb;
+
+		$keys = $wpdb->get_col( "
+				SELECT meta_key
+				FROM $wpdb->postmeta
+				GROUP BY meta_key
+				ORDER BY meta_key" );
+
+		// Make keys useable for filtering
+		$filter_keys = array();
+		foreach ($keys as $key) {
+			$filter_keys[$key] = strtolower($key);
+		}
+		return $filter_keys;
+	}
+
+	/**
+	 * Get a list of previously defined keys.
+	 *
+	 * @return mixed
+	 */
+	function find_filter_meta_keys( $filter_keys = false, $search_key = '') {
+
+		// Check input
+		if ((!$filter_keys) || (!is_array($filter_keys)) || ($search_key == '')) {
+			return false;
+		}
+
+		// Search for key in array of filter_keys
+		$search_key_lower = strtolower($search_key);
+		foreach ($filter_keys as $key => $value) {
+			if (strpos($value, $search_key_lower)) {
+				return $key;
+			}
+		}
+		return false;
 	}
 
 	/**

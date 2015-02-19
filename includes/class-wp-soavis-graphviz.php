@@ -168,13 +168,20 @@ class WP_SoaVis_GraphViz {
 		$post_list_base = array();
 
 		// Get a valid list of posts
-		if (is_array($post_ids)) {
-			$args = array( 'posts_per_page' => -1, 'post__in ' => $post_ids, 'post_type=any' );
+		if (is_array($post_in)) {
+			// Create the list of valid post types
+			$post_types = $this->plugin->wps_post_types->get_post_type_slugs();
+			$post_types[] = 'post';
+			$post_types[] = 'page';
+			// Use the ist of valid post types to find the relevant posts
+			$args = array( 'posts_per_page' => -1, 'post__in' => $post_in, 'post_type' => $post_types );
+//			$args = array( 'posts_per_page' => -1, 'post__in' => $post_in );
 			$post_list = get_posts($args);
+			$this->debugMP('pr',__FUNCTION__ . ' args:', $args);
 		} else {
-			$post_list[] = get_post($post_ids);
+			$post_list[] = get_post($post_in);
 		}
-		$this->debugMP('pr',__FUNCTION__ . ' post_ids:', $post_ids);
+		$this->debugMP('pr',__FUNCTION__ . ' post_in:', $post_in);
 		$this->debugMP('pr',__FUNCTION__ . ' post_list:', $post_list);
 
 		// Create the service tree in both directions up and down
